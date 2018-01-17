@@ -1,11 +1,12 @@
 import {
-  FETCH_NOTELIST, FETCH_NOTEBOOKLIST, FETCH_NOTEBOOKDETAIL
+  FETCH_NOTELIST, FETCH_NOTEBOOKLIST, FETCH_NOTEBOOKDETAIL, FETCH_NOTEDETAIL
 } from '../actions/index';
 
 const initialState = {
   noteList: [],
   notebookList: [],
   notebookDetail: null,
+  noteDetail: null,
 };
 
 export default function (state = initialState, action) {
@@ -16,6 +17,8 @@ export default function (state = initialState, action) {
       return { ...state, notebookList: action.payload.data };
     case FETCH_NOTEBOOKDETAIL:
       return { ...state, notebookDetail: action.payload.data };
+    case FETCH_NOTEDETAIL:
+      return { ...state, noteDetail: action.payload.data };
     default:
       return state;
   }
