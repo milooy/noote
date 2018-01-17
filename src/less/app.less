@@ -1,11 +1,19 @@
 @import (once) "var";
 
-/* ANT DESIGN OVERRIDE */
+/* NORMALIZE */
+a {
+  color: inherit;
+  &:hover {
+    color: inherit;
+  }
+}
 #root,
 .ScrollToTop,
 .App {
   height: 100%;
 }
+
+/* ANT DESIGN OVERRIDE */
 .ant-layout {
   background: @background;
   height: 100%;

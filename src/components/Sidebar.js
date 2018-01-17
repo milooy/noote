@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from 'react-router-dom'
 import { Menu, Icon, Layout } from "antd";
 
 class Sidebar extends Component {
@@ -7,7 +8,6 @@ class Sidebar extends Component {
       <Layout.Sider breakpoint="sm" collapsedWidth="0">
         <Menu
           mode="inline"
-          defaultSelectedKeys={["1"]}
           defaultOpenKeys={["notebooks"]}
         >
           <Menu.SubMenu
@@ -19,8 +19,8 @@ class Sidebar extends Component {
               </span>
             }
           >
-            <Menu.Item key="1">TODO</Menu.Item>
-            <Menu.Item key="2">DONE</Menu.Item>
+            <Menu.Item key="1"><NavLink to="/notebook/1/" activeClassName="ant-menu-item-selected">TODO</NavLink></Menu.Item>
+            <Menu.Item key="2"><NavLink to="/notebook/2/" activeClassName="ant-menu-item-selected">DONE</NavLink></Menu.Item>
           </Menu.SubMenu>
         </Menu>
       </Layout.Sider>

@@ -7,7 +7,7 @@ export default class extends Component {
     return data.map(notebookData => {
       return (
         <Col xs={7} md={5} key={notebookData.id}>
-          <Notebook notebookData={notebookData}/>
+          <Notebook notebookData={notebookData} />
         </Col>
       );
     });

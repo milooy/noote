@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import { Layout } from "antd";
-import { Foo, Sidebar } from ".";
-import { Home } from "../containers";
+import { Sidebar } from ".";
+import { Home, NotebookPage } from "../containers";
 import logo from "../logo.svg";
 import "../css/App.css";
 const { Header, Content } = Layout;
@@ -15,13 +15,13 @@ class App extends Component {
           <Sidebar />
           <Layout>
             <Header>
-              <Link to="/" className="logo">
+              <NavLink to="/" className="logo">
                 <img src={logo} className="App-logo" alt="logo" />NOOTE
-              </Link>
+              </NavLink>
             </Header>
             <Content>
               <Switch>
-                <Route exact path="/foo" component={Foo} />
+                <Route exact path="/notebook/:notebookId" component={NotebookPage}/>
                 <Route exact path="/" component={Home} />
               </Switch>
             </Content>
