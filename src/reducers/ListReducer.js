@@ -9,7 +9,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch ( action.type ) {
     case FETCH_NOTELIST:
-      console.log("헉", action.payload)
       return { ...state, noteList: action.payload.data };
     default:
       return state;
