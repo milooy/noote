@@ -1,2 +1,39 @@
-body {
+@import (once) "var";
+
+/* Note Component */
+.note {
+  background: white;
+  box-shadow: @shadow;
+  margin-bottom: 0.7rem;
+  .inner { /* To make responsive square */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+  }
+  &:after { /* To make responsive square */
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+/* Notebook Component */
+.notebook {
+  background: white;
+  box-shadow: @shadow;
+  border-radius: 3px;
+  .cover {
+    height: 6rem;
+    border-radius: 3px 3px 0 0;
+  }
+  .contents {
+    height: 4rem;
+    margin: 6px;
+  }
+}
+
+/* subtitle */
+.subtitle {
+  margin-top: 1rem;
 }

@@ -1,6 +1,7 @@
 export const FETCH_NOTELIST = "FETCH_NOTELIST";
 export const FETCH_NOTEBOOKLIST = "FETCH_NOTEBOOKLIST";
 
+// TODO: Detatch it later
 let axiosMock = {
   /* Returns Promise object that contains data */
   _promiseMaker: function(data) {
@@ -20,8 +21,8 @@ let axiosMock = {
       ]);
     } else if(url === '/api/notebook/') {
       return this._promiseMaker([
-        { id: 2, title: "DONE", desc: "Erase it from ur head", noteIdList: [2], color: "#F86422" },
-        { id: 1, title: "TODO", desc: "Keep this notes", noteIdList: [1, 3], color: "#F8BA00" }
+        { id: 1, title: "TODO", desc: "Keep this notes", noteIdList: [1, 3], color: "#F8BA00" },
+        { id: 2, title: "DONE", desc: "I've done it", noteIdList: [2], color: "#F86422" }
       ]);
     }
   }

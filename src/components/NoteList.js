@@ -6,7 +6,7 @@ export default class extends Component {
   renderNoteList = data => {
     return data.map(noteData => {
       return (
-        <Col span={4} key={noteData.id}>
+        <Col xs={12} md={6} key={noteData.id}>
           <Note noteData={noteData}/>
         </Col>
       );
@@ -15,6 +15,6 @@ export default class extends Component {
 
   render() {
     const { noteList } = this.props;
-    return <Row>{this.renderNoteList(noteList)}</Row>;
+    return <Row gutter={8}>{this.renderNoteList(noteList)}</Row>;
   }
 }

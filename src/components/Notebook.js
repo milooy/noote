@@ -6,9 +6,12 @@ export default class extends Component {
     
     return (
       <div className="notebook">
-        <div className="title">{notebookData.title}</div>
-        <div className="desc">{notebookData.desc}</div>
-        <div className="num">{notebookData.noteIdList.length}</div>
+        <div className="cover" style={{background:notebookData.color}}></div>
+        <div className="contents">
+          <div className="title">{notebookData.title}</div>
+          <div className="desc">{notebookData.desc}</div>
+          <div className="num">{notebookData.noteIdList.length}</div>
+        </div>
       </div>
     );
   }
