@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { fetchNoteList } from '../actions/index';
+import { fetchNoteList, fetchNotebookList } from '../actions/index';
 import { connect } from 'react-redux';
-import { NoteList } from "../components";
+import { NoteList, NotebookList } from "../components";
 
 class Home extends Component {
   constructor (props) {
@@ -13,14 +13,16 @@ class Home extends Component {
 
   componentDidMount () {
     this.props.fetchNoteList();
+    this.props.fetchNotebookList();
   }
 
   render () {
     return (
       <div>
-        <h2>Recent Notes</h2>
+        <h2 className="subtitle">Recent Notes</h2>
         <NoteList noteList={this.props.noteList}/>
-        <h2>Notebooks</h2>
+        <h2 className="subtitle">Notebooks</h2>
+        <NotebookList notebookList={this.props.notebookList}/>
       </div>
     )
   }
@@ -28,8 +30,9 @@ class Home extends Component {
 
 function mapStateToProps (state) {
   return {
-    noteList: state.lists.noteList
+    noteList: state.lists.noteList,
+    notebookList: state.lists.notebookList
   };
 }
 
-export default connect(mapStateToProps, { fetchNoteList })(Home);
+export default connect(mapStateToProps, { fetchNoteList, fetchNotebookList })(Home);
