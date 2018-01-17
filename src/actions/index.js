@@ -13,8 +13,8 @@ let axiosMock = {
     /* Returns note list */
     if(url === '/api/note/') {
       return this._promiseMaker([
-        { title: "First note", contents: "abcd" },
-        { title: "Second note", contents: "efgh" }
+        { id: 2, title: "Second note", contents: "efgh", date: "2018-01-17" },
+        { id: 1, title: "First note", contents: "abcd", date: "2018-01-16" }
       ]);
     }
   }

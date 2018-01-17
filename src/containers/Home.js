@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchNoteList } from '../actions/index';
 import { connect } from 'react-redux';
+import { NoteList } from "../components";
 
 class Home extends Component {
   constructor (props) {
@@ -16,11 +17,11 @@ class Home extends Component {
 
   render () {
     return (
-      <div>{
-        this.props.noteList.map(d => {
-          let foo = d.title;
-          return <div key={foo}>{foo}</div>
-      })}</div>
+      <div>
+        <h2>Recent Notes</h2>
+        <NoteList noteList={this.props.noteList}/>
+        <h2>Notebooks</h2>
+      </div>
     )
   }
 }
