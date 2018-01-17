@@ -4,18 +4,20 @@
   "private": true,
   "dependencies": {
     "antd": "^3.1.3",
+    "axios": "^0.17.1",
+    "history": "^4.7.2",
     "less-watch-compiler": "^1.10.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3"
   },
   "scripts": {
-    "build-css":
-      "less-watch-compiler --run-once src/less src/css",
-    "watch-css":
-      "npm run build-css && less-watch-compiler src/less src/css --watch",
+    "build-css": "less-watch-compiler --run-once src/less src/css",
+    "watch-css": "npm run build-css && less-watch-compiler src/less src/css --watch",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
