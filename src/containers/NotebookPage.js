@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { fetchNotebookDetail } from "../actions/index";
 import { connect } from "react-redux";
 import { NoteList } from "../components";
+import "../css/NotebookPage.css";
 
 class NotebookPage extends Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class NotebookPage extends Component {
       <div>
         {notebookDetail && (
           <div>
-            <section className="titleSection">
+            <section className="titleSection" style={{background: notebookDetail.color}}>
               <h2 className="headtitle">{notebookDetail.title}</h2>
               <span>{notebookDetail.desc}</span>
             </section>
