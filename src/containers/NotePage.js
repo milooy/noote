@@ -1,21 +1,24 @@
 import React, { Component } from "react";
-import { fetchNoteDetail } from "../actions/index";
+import { fetchNoteDetail, postNote } from "../actions/index";
+import { message } from "antd";
 import { connect } from "react-redux";
+import _ from "lodash";
 import SimpleMDE from "react-simplemde-editor";
 import "react-simplemde-editor/dist/simplemde.min.css";
 
 class NotePage extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      noteValue: ''
+      noteValue: ""
     };
+    this.autosaveNote = _.debounce(this.autosaveNote, 700);
   }
 
   componentDidMount() {
     const noteId = this.props.match.params.noteId;
     this.props.fetchNoteDetail(noteId).then(() => {
-      this.setState({noteValue: this.props.noteDetail.contents});
+      this.setState({ noteValue: this.props.noteDetail.contents });
     });
   }
 
@@ -26,6 +29,18 @@ class NotePage extends Component {
       this.props.fetchNoteDetail(noteId);
     }
   }
+
+  /* Save note once in 7 secs when handleChange occurs */
+  autosaveNote = formData => {
+    const noteId = this.props.match.params.noteId;
+    this.props.postNote(noteId, formData).then(() => {
+      message.info("Note is autosaved", 1);
+    });
+  };
+
+  handleChange = formData => {
+    this.autosaveNote(formData);
+  };
 
   render() {
     const { noteDetail } = this.props;
@@ -42,6 +57,7 @@ class NotePage extends Component {
             <section className="contentsSection">
               <SimpleMDE
                 value={this.state.noteValue}
+                onChange={this.handleChange}
                 options={{ spellChecker: false }}
               />
             </section>
@@ -58,4 +74,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchNoteDetail })(NotePage);
+export default connect(mapStateToProps, { fetchNoteDetail, postNote })(
+  NotePage
+);

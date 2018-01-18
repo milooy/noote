@@ -2,6 +2,7 @@ export const FETCH_NOTELIST = "FETCH_NOTELIST";
 export const FETCH_NOTEBOOKLIST = "FETCH_NOTEBOOKLIST";
 export const FETCH_NOTEBOOKDETAIL = "FETCH_NOTEBOOKDETAIL";
 export const FETCH_NOTEDETAIL = "FETCH_NOTEDETAIL";
+export const POST_NOTE = "POST_NOTE";
 
 // TODO: Detatch it later
 let axiosMock = {
@@ -47,6 +48,13 @@ let axiosMock = {
       let id = url.split('/')[3];
       return this._promiseMaker(this.noteBaseData.filter(d => d.id === Number(id)).pop())
     }
+  },
+
+  post: function(url, option) {
+    if(/\/api\/note\/\d\//.exec(url)) {
+      let id = url.split('/')[3];
+      return this._promiseMaker(`Note no.${id} successfully saved`);
+    }
   }
 }
 
@@ -76,9 +84,22 @@ export function fetchNotebookDetail(id) {
 
 export function fetchNoteDetail(id) {
   const request = axiosMock.get(`/api/note/${id}/`);
-  
   return {
     type: FETCH_NOTEDETAIL,
+    payload: request
+  };
+}
+
+export function postNote(id, formData) {
+  const csrftoken = 'abc123';
+  const request = axiosMock.post(`/api/note/${id}/`, {
+    data: formData,
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  });
+  return {
+    type: POST_NOTE,
     payload: request
   };
 }
