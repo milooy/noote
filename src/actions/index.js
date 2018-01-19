@@ -102,6 +102,7 @@ export function fetchNoteDetail(id) {
 }
 
 export function postNote(id, formData) {
+  /* Backend Logic: If note id exists in database, then update note. If not, then create new note. */
   const csrftoken = 'abc123';
   const request = axiosMock.post(`/api/note/${id}/`, {
     data: formData,
