@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { fetchNoteDetail, postNote } from "../actions/index";
-import { message } from "antd";
+import { fetchNoteDetail, postNote, deleteNote, moveNote } from "../actions/index";
+import { message, Button, Popconfirm } from "antd";
 import { connect } from "react-redux";
 import _ from "lodash";
 import SimpleMDE from "react-simplemde-editor";
@@ -10,6 +10,7 @@ class NotePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      noteId: "",
       noteValue: ""
     };
     this.autosaveNote = _.debounce(this.autosaveNote, 700);
@@ -17,6 +18,7 @@ class NotePage extends Component {
 
   componentDidMount() {
     const noteId = this.props.match.params.noteId;
+    this.setState({ noteId });
     this.props.fetchNoteDetail(noteId).then(() => {
       this.setState({ noteValue: this.props.noteDetail.contents });
     });
@@ -25,21 +27,36 @@ class NotePage extends Component {
   /* Catch route change event */
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname) {
-      const noteId = nextProps.match.params.noteId;
-      this.props.fetchNoteDetail(noteId);
+      this.props.fetchNoteDetail(this.state.noteId);
     }
   }
 
   /* Save note once in 7 secs when handleChange occurs */
   autosaveNote = formData => {
-    const noteId = this.props.match.params.noteId;
-    this.props.postNote(noteId, formData).then(() => {
+    this.props.postNote(this.state.noteId, formData).then(() => {
       message.info("Note is autosaved", 1);
     });
   };
 
   handleChange = formData => {
     this.autosaveNote(formData);
+  };
+
+  handleDelete = () => {
+    const { history, noteDetail, deleteNote } = this.props;
+    deleteNote(this.state.noteId).then(res => {
+      message.success(res.payload.data);
+      history.push(`/notebook/${noteDetail.notebookId}`);
+    });
+  };
+
+  handleMoving = () => {
+    const { history, noteDetail, moveNote } = this.props;
+    const otherNotebookId = noteDetail.notebookId === 1 ? 0 : 1;
+    moveNote(this.state.noteId).then(res => {
+      message.success(res.payload.data);
+      history.push(`/notebook/${otherNotebookId}`);
+    });
   };
 
   render() {
@@ -61,6 +78,19 @@ class NotePage extends Component {
                 options={{ spellChecker: false }}
               />
             </section>
+            <section className="actionSection">
+              <Popconfirm
+                title="Are you sure delete this note?"
+                onConfirm={this.handleDelete}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" shape="circle" icon="delete" />
+              </Popconfirm>
+              <Button onClick={this.handleMoving}>
+                Move to {noteDetail.notebookId === 1 ? "DONE" : "TODO"}
+              </Button>
+            </section>
           </div>
         )}
       </div>
@@ -74,6 +104,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchNoteDetail, postNote })(
+export default connect(mapStateToProps, { fetchNoteDetail, postNote, deleteNote, moveNote })(
   NotePage
 );

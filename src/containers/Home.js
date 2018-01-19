@@ -1,38 +1,47 @@
-import React, { Component } from 'react';
-import { fetchNoteList, fetchNotebookList } from '../actions/index';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { fetchNoteList, fetchNotebookList, deleteNote, moveNote } from "../actions/index";
+import { connect } from "react-redux";
 import { NoteList, NotebookList } from "../components";
 
 class Home extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       end: null
     };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchNoteList();
     this.props.fetchNotebookList();
   }
 
-  render () {
+  render() {
+    const { noteList, deleteNote, moveNote, notebookList } = this.props;
     return (
       <div>
         <h2 className="subtitle">Recent Notes</h2>
-        <NoteList noteList={this.props.noteList}/>
+        <NoteList
+          noteList={noteList}
+          noteAction={{deleteNote, moveNote, fetchNoteList}}
+        />
         <h2 className="subtitle">Notebooks</h2>
-        <NotebookList notebookList={this.props.notebookList}/>
+        <NotebookList notebookList={notebookList} />
       </div>
-    )
+    );
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     noteList: state.lists.noteList,
     notebookList: state.lists.notebookList
   };
 }
 
-export default connect(mapStateToProps, { fetchNoteList, fetchNotebookList })(Home);
+export default connect(mapStateToProps, {
+  fetchNoteList,
+  fetchNotebookList,
+  deleteNote,
+  moveNote
+})(Home);

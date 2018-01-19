@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchNotebookDetail } from "../actions/index";
+import { fetchNotebookDetail, fetchNoteList, deleteNote, moveNote } from "../actions/index";
 import { connect } from "react-redux";
 import { NoteList } from "../components";
 import "../css/NotebookPage.css";
@@ -19,7 +19,7 @@ class NotebookPage extends Component {
   }
 
   render() {
-    const { notebookDetail } = this.props;
+    const { notebookDetail, deleteNote, moveNote, fetchNoteList } = this.props;
     return (
       <div>
         {notebookDetail && (
@@ -28,7 +28,7 @@ class NotebookPage extends Component {
               <h2 className="headtitle">{notebookDetail.title}</h2>
               <span>{notebookDetail.desc}</span>
             </section>
-            <NoteList noteList={notebookDetail.noteList} />
+            <NoteList noteList={notebookDetail.noteList} noteAction={{deleteNote, moveNote, fetchNoteList}}/>
           </div>
         )}
       </div>
@@ -42,4 +42,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchNotebookDetail })(NotebookPage);
+export default connect(mapStateToProps, { fetchNotebookDetail, fetchNoteList, deleteNote, moveNote })(NotebookPage);

@@ -3,6 +3,8 @@ export const FETCH_NOTEBOOKLIST = "FETCH_NOTEBOOKLIST";
 export const FETCH_NOTEBOOKDETAIL = "FETCH_NOTEBOOKDETAIL";
 export const FETCH_NOTEDETAIL = "FETCH_NOTEDETAIL";
 export const POST_NOTE = "POST_NOTE";
+export const DELETE_NOTE = "DELETE_NOTE";
+export const MOVE_NOTE = "MOVE_NOTE";
 
 // TODO: Detatch it later
 let axiosMock = {
@@ -55,6 +57,15 @@ let axiosMock = {
       let id = url.split('/')[3];
       return this._promiseMaker(`Note no.${id} successfully saved`);
     }
+  },
+
+  delete: function(url) {
+    let id = url.split('/')[3];
+    return this._promiseMaker(`Note no.${id} successfully deleted`);
+  },
+
+  put: function(url) {
+    return this._promiseMaker(`Note was successfully moved`);
   }
 }
 
@@ -100,6 +111,32 @@ export function postNote(id, formData) {
   });
   return {
     type: POST_NOTE,
+    payload: request
+  };
+}
+
+export function deleteNote(id) {
+  const csrftoken = 'abc123';
+  const request = axiosMock.delete(`/api/note/${id}/`, {
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  });
+  return {
+    type: DELETE_NOTE,
+    payload: request
+  };
+}
+
+export function moveNote(id) {
+  const csrftoken = 'abc123';
+  const request = axiosMock.put(`/api/note/${id}/`, {
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  });
+  return {
+    type: MOVE_NOTE,
     payload: request
   };
 }

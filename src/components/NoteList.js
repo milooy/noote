@@ -7,7 +7,7 @@ export default class extends Component {
     return data.map(noteData => {
       return (
         <Col xs={12} md={6} key={noteData.id}>
-          <Note noteData={noteData}/>
+          <Note noteData={noteData} noteAction={this.props.noteAction}/>
         </Col>
       );
     });
