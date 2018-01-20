@@ -100,7 +100,7 @@ let axiosMock = {
     /* NOTE DETAIL DATA */
     else if(/\/api\/note\/\d+\//.exec(url)) {
       const id = url.split('/')[3];
-      const emptyObj = { id: id, title: "힝", date: "2018-01-16", notebookId: 1, notebookTitle: 'empty', contents: ""}
+      const emptyObj = { id: id, title: "", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO', contents: ""}
       return this._promiseMaker(this.noteBaseData.filter(d => d.id === Number(id)).pop() || emptyObj)
     }
   },

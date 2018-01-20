@@ -5,7 +5,7 @@ import {
   deleteNote,
   moveNote
 } from "../actions/index";
-import { message, Button, Popconfirm, Input } from "antd";
+import { message, Button, Popconfirm, Input, Select } from "antd";
 import { connect } from "react-redux";
 import _ from "lodash";
 import SimpleMDE from "react-simplemde-editor";
@@ -18,7 +18,8 @@ class NotePage extends Component {
     this.state = {
       noteId: "",
       noteValue: "",
-      noteTitle: ""
+      noteTitle: "",
+      notebookTitle: ""
     };
     this.autosaveNote = _.debounce(this.autosaveNote, 700);
   }
@@ -29,7 +30,8 @@ class NotePage extends Component {
     this.props.fetchNoteDetail(noteId).then(() => {
       this.setState({
         noteValue: this.props.noteDetail.contents,
-        noteTitle: this.props.noteDetail.title
+        noteTitle: this.props.noteDetail.title,
+        notebookTitle: this.props.noteDetail.notebookTitle
       });
     });
   }
@@ -60,12 +62,10 @@ class NotePage extends Component {
     });
   };
 
-  handleMoving = () => {
-    const { history, noteDetail, moveNote } = this.props;
-    const otherNotebookId = noteDetail.notebookId === 1 ? 0 : 1;
-    moveNote(this.state.noteId).then(res => {
+  handleMoving = value => {
+    this.setState({notebookTitle: value });
+    this.props.moveNote(this.state.noteId).then(res => {
       message.success(res.payload.data);
-      history.push(`/notebook/${otherNotebookId}`);
     });
   };
 
@@ -86,7 +86,13 @@ class NotePage extends Component {
                 />
               </h2>
               <span>{noteDetail.date}</span>
-              <span>{noteDetail.notebookTitle}</span>
+              <Select
+                value={this.state.notebookTitle}
+                onChange={this.handleMoving}
+              >
+                <Select.Option value="TODO">TODO</Select.Option>
+                <Select.Option value="DONE">DONE</Select.Option>
+              </Select>
             </section>
             <section className="contentsSection">
               <SimpleMDE
@@ -104,9 +110,6 @@ class NotePage extends Component {
               >
                 <Button type="danger" shape="circle" icon="delete" />
               </Popconfirm>
-              <Button onClick={this.handleMoving}>
-                Move to {noteDetail.notebookId === 1 ? "DONE" : "TODO"}
-              </Button>
             </section>
           </div>
         )}
