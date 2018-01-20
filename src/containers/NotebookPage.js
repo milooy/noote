@@ -47,7 +47,6 @@ class NotebookPage extends Component {
     console.log("검색", query);
     const sort = this.state.sort;
     this.setState({query});
-    // TODO: search랑 sort동시에 하기 (state저장)
     this.props.fetchNotebookDetail(this.state.notebookId, {
       params: { sort, query }
     });

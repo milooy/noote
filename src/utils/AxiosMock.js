@@ -1,8 +1,16 @@
+const content3 = `We want to implement single page application **which can manage notes**(in other words, memo).
+
+## Spec
+And for managing notes, We need notebook which can organize note.
+Expected User behavior in organizing note will be like this.
+[This is a github link](https://github.com/milooy/noote)`
+
 let axiosMock = {
   noteBaseData: [
-      { id: 3, title: "Third note", contents: "flsj", date: "2018-01-18", notebookId: 1, notebookTitle: 'TODO' },
-      { id: 2, title: "Second note", contents: "efgh", date: "2018-01-17", notebookId: 2, notebookTitle: 'DONE' },
-      { id: 1, title: "First note", contents: "abcd", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO' }
+      { id: 3, title: "NOOTE Specification", date: "2018-01-18", notebookId: 1, notebookTitle: 'TODO' , contents: content3
+      },
+      { id: 2, title: "Second note", date: "2018-01-17", notebookId: 2, notebookTitle: 'DONE', contents: "efgh"},
+      { id: 1, title: "First note", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO', contents: "abcd"}
   ],
 
   notebookBaseData: [
