@@ -11,8 +11,18 @@ import { Input, Select } from "antd";
 import "../css/NotebookPage.css";
 
 class NotebookPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notebookId: "",
+      sort: "",
+      query: "",
+    };
+  }
+
   componentDidMount() {
     const notebookId = this.props.match.params.notebookId;
+    this.setState({notebookId});
     this.props.fetchNotebookDetail(notebookId);
   }
 
@@ -20,16 +30,28 @@ class NotebookPage extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.location.pathname !== nextProps.location.pathname) {
       const notebookId = nextProps.match.params.notebookId;
+      this.setState({notebookId});
       this.props.fetchNotebookDetail(notebookId);
     }
   }
 
   handleSortingChange = sort => {
-    const notebookId = this.props.match.params.notebookId;
-    this.props.fetchNotebookDetail(notebookId, {
-      params: { sort }
+    const query = this.state.query;
+    this.setState({sort});
+    this.props.fetchNotebookDetail(this.state.notebookId, {
+      params: { sort, query }
     });
   };
+
+  handleSearch = query => {
+    console.log("검색", query);
+    const sort = this.state.sort;
+    this.setState({query});
+    // TODO: search랑 sort동시에 하기 (state저장)
+    this.props.fetchNotebookDetail(this.state.notebookId, {
+      params: { sort, query }
+    });
+  }
 
   render() {
     const { notebookDetail, deleteNote, moveNote, fetchNoteList } = this.props;
@@ -48,7 +70,7 @@ class NotebookPage extends Component {
             <section className="filterSection">
               <Input.Search
                 placeholder="input search text"
-                onSearch={value => console.log(value)}
+                onSearch={this.handleSearch}
                 style={{ width: 200 }}
               />
               <Select
