@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   fetchNotebookDetail,
-  fetchNoteList,
   deleteNote,
   moveNote
 } from "../actions/index";
@@ -51,8 +50,12 @@ class NotebookPage extends Component {
     });
   }
 
+  fetchNoteList = () => {
+    this.props.fetchNotebookDetail(this.state.notebookId);
+  }
+
   render() {
-    const { notebookDetail, deleteNote, moveNote, fetchNoteList } = this.props;
+    const { notebookDetail, deleteNote, moveNote } = this.props;
     
     return (
       <div>
@@ -82,7 +85,7 @@ class NotebookPage extends Component {
             </section>
             <NoteList
               noteList={notebookDetail.noteList}
-              noteAction={{ deleteNote, moveNote, fetchNoteList }}
+              noteAction={{ deleteNote, moveNote, fetchNoteList: this.fetchNoteList }}
             />
           </div>
         )}
@@ -99,7 +102,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   fetchNotebookDetail,
-  fetchNoteList,
   deleteNote,
   moveNote
 })(NotebookPage);

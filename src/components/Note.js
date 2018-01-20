@@ -7,8 +7,8 @@ export default class extends Component {
     const { noteData, noteAction } = this.props;
     const noteId = noteData.id;
     e.domEvent.stopPropagation();
-    
-    switch ( e.key ) {
+
+    switch (e.key) {
       case "0": /* Move note to other notebook */
         noteAction.moveNote(noteId).then(res => {
           message.success(res.payload.data);
@@ -28,10 +28,12 @@ export default class extends Component {
 
   render() {
     const { noteData } = this.props;
-    
+
     const menu = (
       <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="0">Move to {noteData.notebookId === 1 ? "DONE" : "TODO"}</Menu.Item>
+        <Menu.Item key="0">
+          Move to {noteData.notebookId === 1 ? "DONE" : "TODO"}
+        </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="1">Delete Note</Menu.Item>
       </Menu>

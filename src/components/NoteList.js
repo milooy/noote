@@ -8,7 +8,10 @@ export default class extends Component {
     return data.map(noteData => {
       return (
         <Col xs={12} md={6} key={noteData.id}>
-          <Note noteData={noteData} noteAction={this.props.noteAction}/>
+          <Note
+            noteData={noteData}
+            noteAction={this.props.noteAction}
+          />
         </Col>
       );
     });
@@ -21,12 +24,12 @@ export default class extends Component {
     return (
       <Row gutter={8}>
         <Col xs={12} md={6}>
-        <Link to={`/note/${newNoteId}/`}>
-          <div className="note new-note">
-            <div className="inner">
-              <Icon type="plus" />
+          <Link to={`/note/${newNoteId}/`}>
+            <div className="note new-note">
+              <div className="inner">
+                <Icon type="plus" />
+              </div>
             </div>
-          </div>
           </Link>
         </Col>
         {this.renderNoteList(noteList)}

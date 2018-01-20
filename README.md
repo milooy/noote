@@ -29,7 +29,7 @@ And for managing notes, We need notebook which can organize note.
 
 Expected User behavior in organizing note will be like this
 
- - [ ] Create note in the "Todo" notebook
+ - [x] Create note in the "Todo" notebook
  - [x] Move note in the "Todo" notebook to "Done" notebook
  - [x] Delete note in the "Done" notebook
  - [x] Sort notes in the "Todo" notebook via notebook title or update time
@@ -38,14 +38,14 @@ Expected User behavior in organizing note will be like this
 ## Description
 - [x] note has title, content and update time.
 - [x] notebook has title, description and set of notes.
-- [ ] note should be included one of notebook.
+- [x] note should be included one of notebook.
 - [x] In note page, you can read/update/remove note
-- [ ] In notebook page, you can manage notes - create, read, delete, move to other notebook, sort and filtering
+- [x] In notebook page, you can manage notes - create, read, delete, move to other notebook, sort and filtering
 - [x] In notebook page, you should not show note content fully, you should show little about content
 - [x] Main page, you can see the notebooks and recent updated notes.
 
 ## Requirement
-- [ ] You should implement using React
+- [x] You should implement using React
 - [x] all notes and notebooks should be able to access by url
 - [x] all communication with backend side will be happened via REST api
     - [x] but you don’t need to implement, just make mock

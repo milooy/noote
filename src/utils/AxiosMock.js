@@ -63,10 +63,11 @@ let axiosMock = {
   },
 
   /* Mockup of GET method */
-  get: function(url, option) {
+  get: function(url, option, modified) {
     /* NOTE LIST */
     if(url === '/api/note/') {
-      return this._promiseMaker(this.noteBaseData);
+      /* Clone object because react doesn't render just modified (same) object. */
+      return this._promiseMaker(this._clone(this.noteBaseData));
     }
     /* NOTEBOOK LIST */
     else if(url === '/api/notebook/') {
@@ -114,6 +115,7 @@ let axiosMock = {
 
   delete: function(url) {
     let id = url.split('/')[3];
+    this.noteBaseData = this.noteBaseData.filter(d => d.id !== Number(id));
     return this._promiseMaker(`Note no.${id} successfully deleted`);
   },
 

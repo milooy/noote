@@ -16,8 +16,12 @@ class Home extends Component {
     this.props.fetchNotebookList();
   }
 
+  handleFetchNoteList = () => {
+    this.props.fetchNoteList();
+  }
+
   render() {
-    const { noteList, deleteNote, moveNote, notebookList } = this.props;
+    const { noteList, deleteNote, moveNote, notebookList, fetchNoteList } = this.props;
     return (
       <div>
         <h2 className="subtitle">Recent Notes</h2>
