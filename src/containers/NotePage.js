@@ -1,17 +1,24 @@
 import React, { Component } from "react";
-import { fetchNoteDetail, postNote, deleteNote, moveNote } from "../actions/index";
-import { message, Button, Popconfirm } from "antd";
+import {
+  fetchNoteDetail,
+  postNote,
+  deleteNote,
+  moveNote
+} from "../actions/index";
+import { message, Button, Popconfirm, Input } from "antd";
 import { connect } from "react-redux";
 import _ from "lodash";
 import SimpleMDE from "react-simplemde-editor";
 import "react-simplemde-editor/dist/simplemde.min.css";
+import "../css/NotePage.css";
 
 class NotePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       noteId: "",
-      noteValue: ""
+      noteValue: "",
+      noteTitle: ""
     };
     this.autosaveNote = _.debounce(this.autosaveNote, 700);
   }
@@ -20,7 +27,10 @@ class NotePage extends Component {
     const noteId = this.props.match.params.noteId;
     this.setState({ noteId });
     this.props.fetchNoteDetail(noteId).then(() => {
-      this.setState({ noteValue: this.props.noteDetail.contents });
+      this.setState({
+        noteValue: this.props.noteDetail.contents,
+        noteTitle: this.props.noteDetail.title
+      });
     });
   }
 
@@ -67,7 +77,14 @@ class NotePage extends Component {
         {noteDetail && (
           <div>
             <section className="noteTitleSection">
-              <h2 className="headtitle">{noteDetail.title}</h2>
+              <h2 className="headTitle">
+                <Input
+                  size="large"
+                  placeholder="Title"
+                  value={this.state.noteTitle}
+                  onChange={e => this.setState({ noteTitle: e.target.value })}
+                />
+              </h2>
               <span>{noteDetail.date}</span>
               <span>{noteDetail.notebookTitle}</span>
             </section>
@@ -104,6 +121,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchNoteDetail, postNote, deleteNote, moveNote })(
-  NotePage
-);
+export default connect(mapStateToProps, {
+  fetchNoteDetail,
+  postNote,
+  deleteNote,
+  moveNote
+})(NotePage);

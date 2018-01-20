@@ -32,7 +32,7 @@ Expected User behavior in organizing note will be like this
  - [ ] Create note in the "Todo" notebook
  - [x] Move note in the "Todo" notebook to "Done" notebook
  - [x] Delete note in the "Done" notebook
- - [ ] Sort notes in the "Todo" notebook via notebook title or update time
+ - [x] Sort notes in the "Todo" notebook via notebook title or update time
 
 
 ## Description
@@ -41,7 +41,7 @@ Expected User behavior in organizing note will be like this
 - [ ] note should be included one of notebook.
 - [x] In note page, you can read/update/remove note
 - [ ] In notebook page, you can manage notes - create, read, delete, move to other notebook, sort and filtering
-- [ ] In notebook page, you should not show note content fully, you should show little about content
+- [x] In notebook page, you should not show note content fully, you should show little about content
 - [x] Main page, you can see the notebooks and recent updated notes.
 
 ## Requirement
@@ -55,7 +55,7 @@ Expected User behavior in organizing note will be like this
 ## Good to have
 - [ ] Integration test
 - [x] Rich notes content editor
-- [ ] Other features that can help user to using this app
+- [x] Other features that can help user to using this app
 
 ## Essential technology stack
 - React (+ jsx) for component based UI

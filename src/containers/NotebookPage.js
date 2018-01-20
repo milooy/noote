@@ -44,7 +44,6 @@ class NotebookPage extends Component {
   };
 
   handleSearch = query => {
-    console.log("검색", query);
     const sort = this.state.sort;
     this.setState({query});
     this.props.fetchNotebookDetail(this.state.notebookId, {
@@ -68,7 +67,7 @@ class NotebookPage extends Component {
             </section>
             <section className="filterSection">
               <Input.Search
-                placeholder="input search text"
+                placeholder="Search"
                 onSearch={this.handleSearch}
                 style={{ width: 200 }}
               />

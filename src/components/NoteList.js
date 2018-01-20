@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Row, Col } from "antd";
+import { Link } from "react-router-dom";
+import { Row, Col, Icon } from "antd";
 import { Note } from ".";
 
 export default class extends Component {
@@ -15,6 +16,21 @@ export default class extends Component {
 
   render() {
     const { noteList } = this.props;
-    return <Row gutter={8}>{this.renderNoteList(noteList)}</Row>;
+    const newNoteId = 99;
+
+    return (
+      <Row gutter={8}>
+        <Col xs={12} md={6}>
+        <Link to={`/note/${newNoteId}/`}>
+          <div className="note new-note">
+            <div className="inner">
+              <Icon type="plus" />
+            </div>
+          </div>
+          </Link>
+        </Col>
+        {this.renderNoteList(noteList)}
+      </Row>
+    );
   }
 }
