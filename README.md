@@ -9,7 +9,7 @@ $ npm install
 $ npm start
 ```
 
-## Issue
+## Issues
 Issues are in the [github issue page](https://github.com/milooy/noote/issues/)
 
 ## Dependencies

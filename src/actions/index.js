@@ -13,6 +13,11 @@ let axiosMock = {
       { id: 2, title: "Second note", contents: "efgh", date: "2018-01-17", notebookId: 2, notebookTitle: 'DONE' },
       { id: 1, title: "First note", contents: "abcd", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO' }
   ],
+
+  notebookBaseData: [
+    { id: 1, title: "TODO", desc: "Keep this notes", noteIdList: [1, 3], color: "#F8BA00" },
+    { id: 2, title: "DONE", desc: "I've done it", noteIdList: [2], color: "#F86422" }
+  ],
   
   /* Returns Promise object that contains data */
   _promiseMaker: function(data) {
@@ -21,31 +26,64 @@ let axiosMock = {
     });
   },
 
+  _sortByTitle: function(arr) {
+    return arr.sort((a, b) => {
+      const titleA = a.title.toUpperCase(), titleB = b.title.toUpperCase();
+      if(titleA < titleB) {
+      return -1;
+      } else if(titleA > titleB) {
+        return 1;
+      }
+      return 0;
+    });
+  },
+  
+  _sortByDate: function(arr) {
+    return arr.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+  },
+
+  _clone: function(obj) {
+    if (obj === null || typeof(obj) !== 'object') {
+      return obj;
+    }
+    var copy = obj.constructor();
+    for (var attr in obj) {
+      if (obj.hasOwnProperty(attr)) {
+        copy[attr] = this._clone(obj[attr]);
+      }
+    }
+    return copy;
+  },
+
   /* Mockup of GET method */
   get: function(url, option) {
     /* Returns note list */
     if(url === '/api/note/') {
       return this._promiseMaker(this.noteBaseData);
     } else if(url === '/api/notebook/') {
-      return this._promiseMaker([
-        { id: 1, title: "TODO", desc: "Keep this notes", noteIdList: [1, 3], color: "#F8BA00" },
-        { id: 2, title: "DONE", desc: "I've done it", noteIdList: [2], color: "#F86422" }
-      ]);
+      return this._promiseMaker(this.notebookBaseData);
     } else if(/\/api\/notebook\/\d\//.exec(url)) {
-      let noteList = [], obj = {};
-      if(url.endsWith('/1/')) {
-        noteList = [
-          { id: 3, title: "Third note", contents: "flsj", date: "2018-01-18" },
-          { id: 1, title: "First note", contents: "abcd", date: "2018-01-16" }
-        ];
-        obj = { id: 1, title: "TODO", desc: "Keep this notes", noteList: noteList, color: "#F8BA00" }
-      } else {
-        noteList = [
-          { id: 2, title: "Second note", contents: "efgh", date: "2018-01-17" }
-        ]
-        obj = { id: 2, title: "DONE", desc: "I've done it", noteList: noteList, color: "#F86422" }
+      let id = url.split('/')[3];
+      let filteredNotebookBaseData = this.notebookBaseData.find(notebookData => {
+        if(notebookData.id === Number(id)) {
+          notebookData.noteList = this.noteBaseData.filter(noteData => {
+            return notebookData.noteIdList.includes(noteData.id);
+          });
+          return true;
+        } else { return false }
+      });
+
+      if(option && option.params) {
+        if(option.params.sort === 'title') {
+          filteredNotebookBaseData.noteList = this._sortByTitle(filteredNotebookBaseData.noteList);
+        } else if(option.params.sort === 'date') {
+          filteredNotebookBaseData.noteList = this._sortByDate(filteredNotebookBaseData.noteList);
+        }
       }
-      return this._promiseMaker(obj)
+      /* Clone object because react doesn't render just modified (same) object. */
+      return this._promiseMaker(this._clone(filteredNotebookBaseData));
     } else if(/\/api\/note\/\d\//.exec(url)) {
       let id = url.split('/')[3];
       return this._promiseMaker(this.noteBaseData.filter(d => d.id === Number(id)).pop())
@@ -69,8 +107,8 @@ let axiosMock = {
   }
 }
 
-export function fetchNoteList() {
-  const request = axiosMock.get('/api/note/');
+export function fetchNoteList(option) {
+  const request = axiosMock.get('/api/note/', option);
   return {
     type: FETCH_NOTELIST,
     payload: request
@@ -85,8 +123,8 @@ export function fetchNotebookList() {
   };
 }
 
-export function fetchNotebookDetail(id) {
-  const request = axiosMock.get(`/api/notebook/${id}/`);
+export function fetchNotebookDetail(id, option) {
+  const request = axiosMock.get(`/api/notebook/${id}/`, option);
   return {
     type: FETCH_NOTEBOOKDETAIL,
     payload: request
