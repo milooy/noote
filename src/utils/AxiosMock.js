@@ -95,7 +95,7 @@ let axiosMock = {
       return this._promiseMaker(this.notebookBaseData);
     }
     /* NOTEBOOK DETAIL DATA */
-    else if(/\/api\/notebook\/\d\//.exec(url)) {
+    else if(/\/api\/notebook\/\d+\//.exec(url)) {
       const id = url.split('/')[3];
       const filteredNotebookBaseData = this.notebookBaseData.find(notebookData => {
         if(notebookData.id === Number(id)) {
@@ -130,7 +130,7 @@ let axiosMock = {
 
   post: function(url, option) {
     /* SAVE NOTE BY ID */
-    if(/\/api\/note\/\d\//.exec(url)) {
+    if(/\/api\/note\/\d+\//.exec(url)) {
       let id = url.split('/')[3];
       return this._promiseMaker(`Note no.${id} successfully saved`);
     }
