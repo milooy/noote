@@ -12,7 +12,7 @@ import SimpleMDE from "react-simplemde-editor";
 import "react-simplemde-editor/dist/simplemde.min.css";
 import "../css/NotePage.css";
 
-class NotePage extends Component {
+export class NotePage extends Component {
   constructor(props) {
     super(props);
     this.state = {

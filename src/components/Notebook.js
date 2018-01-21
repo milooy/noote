@@ -8,11 +8,12 @@ export default class extends Component {
     return (
       <Link to={`/notebook/${notebookData.id}/`}>
         <div className="notebook">
-          <div className="cover" style={{ background: notebookData.color }} />
+          <div className="cover" style={{ background: notebookData.color }}>
+            <div className="num">{notebookData.noteIdList.length}</div>
+          </div>
           <div className="contents">
             <div className="title">{notebookData.title}</div>
             <div className="desc">{notebookData.desc}</div>
-            <div className="num">{notebookData.noteIdList.length}</div>
           </div>
         </div>
       </Link>

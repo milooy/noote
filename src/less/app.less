@@ -15,14 +15,17 @@ a {
 
 /* ANT DESIGN OVERRIDE */
 .ant-layout {
-  background: @background;
+  background: @background !important;
   height: 100%;
 }
 .ant-layout-sider {
   background: white !important;
+  li {
+    height: 100vh;
+  }
 }
 .ant-layout-sider-zero-width-trigger {
-  top: 12px;
+  top: 10px !important;
   z-index: 1;
   opacity: 0.9;
 }
@@ -38,6 +41,7 @@ a {
 }
 .ant-layout-content {
   padding: 0 2rem;
+  margin-bottom: 2rem;
   @media @ms-xs {
     padding: 0 1rem;
   }
@@ -48,20 +52,51 @@ a {
   background: white;
   box-shadow: @shadow;
   margin-bottom: 0.7rem;
+  transition: all 200ms cubic-bezier(.02, .01, .47, 1);
+  &:hover {
+    box-shadow: 0 30px 30px rgba(0,0,0,0.1);
+  }
   .inner { /* To make responsive square */
+    display: flex;
+    flex-direction: column;
     position: absolute;
     width: 100%;
     height: 100%;
-    padding: 0.5rem;
+    padding: 0.9rem;
+    justify-content: space-between;
+    transition: all 200ms cubic-bezier(.02, .01, .47, 1);
+    &:hover {
+      transform: translate(0, -3px);
+      transition-delay: 0s !important;
+    }
   }
   &:after { /* To make responsive square */
     content: "";
     display: block;
     padding-bottom: 100%;
   }
+  .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
   .contents {
-    height: 60%;
     overflow: hidden;
+    font-size: 0.8rem;
+    font-weight: lighter;
+  }
+  .note-footer {
+    justify-content: flex-end;
+    
+    text-align: right;
+    .ant-dropdown-link {
+      float: left;
+    }
+    .date {
+      font-size: 0.75rem;
+      color: @gray_2;
+      margin-top: 3px;
+      font-weight: lighter;
+    }
   }
   &.new-note {
     i.anticon {
@@ -72,6 +107,7 @@ a {
       transform: translate(-50%, -50%);
     }
   }
+  
 }
 
 /* Notebook Component */
@@ -82,10 +118,28 @@ a {
   .cover {
     height: 6rem;
     border-radius: 3px 3px 0 0;
+    position: relative;
+    .num {
+      color: white;
+      position: absolute;
+      right: 5px;
+      bottom: -1.2rem;
+      font-size: 3rem;
+      font-weight: bolder;
+    }
+  }
+  .title {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .desc {
+    font-size: 0.8rem;
+    font-weight: lighter;
   }
   .contents {
     height: 4rem;
     margin: 6px;
+    
   }
 }
 

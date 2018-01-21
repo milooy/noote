@@ -49,12 +49,14 @@ export default class extends Component {
           <div className="inner">
             <div className="title">{noteData.title}</div>
             <div className="contents">{noteData.contents}</div>
-            <div className="date">{noteData.date}</div>
-            <Dropdown overlay={menu} trigger={["click", "hover"]}>
-              <div className="ant-dropdown-link">
-                <Icon type="down" />
-              </div>
-            </Dropdown>
+            <div className="note-footer">
+              <Dropdown overlay={menu} trigger={["click", "hover"]}>
+                <div className="ant-dropdown-link">
+                  <Icon type="down" />
+                </div>
+              </Dropdown>
+              <div className="date">{noteData.date}</div>
+            </div>
           </div>
         </div>
       </Link>

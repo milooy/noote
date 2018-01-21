@@ -1,5 +1,8 @@
 import moment from "moment";
 
+const content4 = `Collaborative data science
+ZEPL brings all types of notebook and people you need together so your team can be data driven.`
+
 const content3 = `We want to implement single page application **which can manage notes**(in other words, memo).
 
 ## Spec
@@ -7,16 +10,27 @@ And for managing notes, We need notebook which can organize note.
 Expected User behavior in organizing note will be like this.
 [This is a github link](https://github.com/milooy/noote)`
 
+const content2 = `Returns the prop value for the root node of the wrapper with the provided key. 
+prop(key) can only be called on a wrapper of a single node.
+NOTE: When called on a shallow wrapper, .prop(key) will return values for props on the root node that the component renders, not the component itself. To return the props for the entire React component, use wrapper.instance().props. See .instance() => ReactComponent`
+
+const content1 = `Don't lose it all in the blur of the stars
+seeing is deceiving, dreaming is believing.
+It's ok not to be okay, sometimes it's hard to follow your heart
+But tears don't mean you're losing, everybody bruising. Just be true to who you are.`
+
+
 /* Mocking axios HTTP request and returns json response */
 let axiosMock = {
   noteBaseData: [
-      { id: 3, title: "NOOTE Specification", date: "2018-01-18", notebookId: 1, notebookTitle: 'TODO' , contents: content3},
-      { id: 2, title: "Second note", date: "2018-01-17", notebookId: 2, notebookTitle: 'DONE', contents: "efgh"},
-      { id: 1, title: "First note", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO', contents: "abcd"}
+      { id: 4, title: "What is zepl?", date: "2018-01-19", notebookId: 1, notebookTitle: 'TODO' , contents: content4},
+      { id: 3, title: "Specification of noote", date: "2018-01-18", notebookId: 1, notebookTitle: 'TODO' , contents: content3},
+      { id: 2, title: "Using props value", date: "2018-01-17", notebookId: 2, notebookTitle: 'DONE', contents: content2},
+      { id: 1, title: "Fall in love again", date: "2018-01-12", notebookId: 1, notebookTitle: 'TODO', contents: content1}
   ],
 
   notebookBaseData: [
-    { id: 1, title: "TODO", desc: "Keep this notes", noteIdList: [1, 3], color: "#F8BA00" },
+    { id: 1, title: "TODO", desc: "Do it today", noteIdList: [1, 3, 4], color: "#F8BA00" },
     { id: 2, title: "DONE", desc: "I've done it", noteIdList: [2], color: "#F86422" }
   ],
   
