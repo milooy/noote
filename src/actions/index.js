@@ -8,6 +8,7 @@ export const POST_NOTE = "POST_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 export const MOVE_NOTE = "MOVE_NOTE";
 
+/* [GET] Fetch note list */
 export function fetchNoteList(option) {
   const request = axiosMock.get('/api/note/', option);
   return {
@@ -16,6 +17,7 @@ export function fetchNoteList(option) {
   };
 }
 
+/* [GET] Fetch notebook list */
 export function fetchNotebookList() {
   const request = axiosMock.get('/api/notebook/');
   return {
@@ -24,6 +26,7 @@ export function fetchNotebookList() {
   };
 }
 
+/* [GET] Fetch notebook detail data by notebook id */
 export function fetchNotebookDetail(id, option) {
   const request = axiosMock.get(`/api/notebook/${id}/`, option);
   return {
@@ -32,6 +35,7 @@ export function fetchNotebookDetail(id, option) {
   };
 }
 
+/* [GET] Fech note detail data by note id */
 export function fetchNoteDetail(id) {
   const request = axiosMock.get(`/api/note/${id}/`);
   return {
@@ -40,6 +44,7 @@ export function fetchNoteDetail(id) {
   };
 }
 
+/* [POST] Post note by id */
 export function postNote(id, formData) {
   /* Backend Logic: If note id exists in database, then update note. If not, then create new note. */
   const csrftoken = 'abc123';
@@ -55,6 +60,7 @@ export function postNote(id, formData) {
   };
 }
 
+/* [DELETE] Delete note by id */
 export function deleteNote(id) {
   const csrftoken = 'abc123';
   const request = axiosMock.delete(`/api/note/${id}/`, {
@@ -68,6 +74,7 @@ export function deleteNote(id) {
   };
 }
 
+/* [PUT] Move note by id */
 export function moveNote(id) {
   const csrftoken = 'abc123';
   const request = axiosMock.put(`/api/note/${id}/`, {

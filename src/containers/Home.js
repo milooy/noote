@@ -4,20 +4,9 @@ import { connect } from "react-redux";
 import { NoteList, NotebookList } from "../components";
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      end: null
-    };
-  }
-
   componentDidMount() {
     this.props.fetchNoteList();
     this.props.fetchNotebookList();
-  }
-
-  handleFetchNoteList = () => {
-    this.props.fetchNoteList();
   }
 
   render() {
@@ -25,10 +14,7 @@ class Home extends Component {
     return (
       <div>
         <h2 className="subtitle">Recent Notes</h2>
-        <NoteList
-          noteList={noteList}
-          noteAction={{deleteNote, moveNote, fetchNoteList}}
-        />
+        <NoteList noteList={noteList} noteAction={{deleteNote, moveNote, fetchNoteList}} />
         <h2 className="subtitle">Notebooks</h2>
         <NotebookList notebookList={notebookList} />
       </div>

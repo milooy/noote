@@ -4,7 +4,7 @@ import { Layout } from "antd";
 import { Sidebar } from ".";
 import { Home, NotebookPage, NotePage } from "../containers";
 import logo from "../logo.svg";
-import "../css/App.css";
+import "../css/app.css";
 const { Header, Content } = Layout;
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
           <Layout>
             <Header>
               <NavLink to="/" className="logo">
-                <img src={logo} className="App-logo" alt="logo" />NOOTE
+                <img src={logo} className="App-logo" alt="logo" />
               </NavLink>
             </Header>
             <Content>

@@ -5,8 +5,7 @@ import {
   moveNote
 } from "../actions/index";
 import { connect } from "react-redux";
-import { NoteList } from "../components";
-import { Input, Select } from "antd";
+import { NoteList, FilterNote } from "../components";
 import "../css/NotebookPage.css";
 
 class NotebookPage extends Component {
@@ -34,6 +33,7 @@ class NotebookPage extends Component {
     }
   }
 
+  /* Sort notes by title, date */
   handleSortingChange = sort => {
     const query = this.state.query;
     this.setState({sort});
@@ -42,6 +42,7 @@ class NotebookPage extends Component {
     });
   };
 
+  /* Search notes by title, contents */
   handleSearch = query => {
     const sort = this.state.sort;
     this.setState({query});
@@ -50,6 +51,7 @@ class NotebookPage extends Component {
     });
   }
 
+  /* Fetch note list */
   fetchNoteList = () => {
     this.props.fetchNotebookDetail(this.state.notebookId);
   }
@@ -61,28 +63,12 @@ class NotebookPage extends Component {
       <div>
         {notebookDetail && (
           <div>
-            <section
-              className="titleSection"
-              style={{ background: notebookDetail.color }}
-            >
+            <section className="titleSection"
+              style={{ background: notebookDetail.color }} >
               <h2 className="headtitle">{notebookDetail.title}</h2>
               <span>{notebookDetail.desc}</span>
             </section>
-            <section className="filterSection">
-              <Input.Search
-                placeholder="Search"
-                onSearch={this.handleSearch}
-                style={{ width: 200 }}
-              />
-              <Select
-                defaultValue="date"
-                style={{ width: 160 }}
-                onChange={this.handleSortingChange}
-              >
-                <Select.Option value="date">Sort by date</Select.Option>
-                <Select.Option value="title">Sort by title</Select.Option>
-              </Select>
-            </section>
+            <FilterNote onSearch={this.handleSearch} onChange={this.handleSortingChange} />
             <NoteList
               noteList={notebookDetail.noteList}
               noteAction={{ deleteNote, moveNote, fetchNoteList: this.fetchNoteList }}

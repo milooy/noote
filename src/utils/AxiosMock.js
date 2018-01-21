@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const content3 = `We want to implement single page application **which can manage notes**(in other words, memo).
 
 ## Spec
@@ -5,6 +7,7 @@ And for managing notes, We need notebook which can organize note.
 Expected User behavior in organizing note will be like this.
 [This is a github link](https://github.com/milooy/noote)`
 
+/* Mocking axios HTTP request and returns json response */
 let axiosMock = {
   noteBaseData: [
       { id: 3, title: "NOOTE Specification", date: "2018-01-18", notebookId: 1, notebookTitle: 'TODO' , contents: content3},
@@ -24,6 +27,7 @@ let axiosMock = {
     });
   },
 
+  /* Get array and returns sorted array(by title) */
   _sortByTitle: function(arr) {
     return arr.sort((a, b) => {
       const titleA = a.title.toUpperCase(), titleB = b.title.toUpperCase();
@@ -36,12 +40,14 @@ let axiosMock = {
     });
   },
   
+  /* Get array and returns sorted array(by date) */
   _sortByDate: function(arr) {
     return arr.sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
   },
 
+  /* Get array, query and returns filtered bookList that contains query in title, contents */
   _searchByTitleAndContents: function(arr, query) {
     return arr.filter(obj => {
       const text = obj.title + ' ' + obj.contents;
@@ -49,6 +55,7 @@ let axiosMock = {
     });
   },
 
+  /* Deep copy of javascript object */
   _clone: function(obj) {
     if (obj === null || typeof(obj) !== 'object') {
       return obj;
@@ -76,7 +83,7 @@ let axiosMock = {
     /* NOTEBOOK DETAIL DATA */
     else if(/\/api\/notebook\/\d\//.exec(url)) {
       const id = url.split('/')[3];
-      let filteredNotebookBaseData = this.notebookBaseData.find(notebookData => {
+      const filteredNotebookBaseData = this.notebookBaseData.find(notebookData => {
         if(notebookData.id === Number(id)) {
           notebookData.noteList = this.noteBaseData.filter(noteData => {
             return notebookData.noteIdList.includes(noteData.id);
@@ -84,13 +91,14 @@ let axiosMock = {
           return true;
         } else { return false }
       });
-
       if(option && option.params) {
+        /* Sort notes in notebook by title, date */
         if(option.params.sort === 'title') {
           filteredNotebookBaseData.noteList = this._sortByTitle(filteredNotebookBaseData.noteList);
         } else if(option.params.sort === 'date') {
           filteredNotebookBaseData.noteList = this._sortByDate(filteredNotebookBaseData.noteList);
         }
+        /* Filter notebook by query */
         if(option.params.query) {
           filteredNotebookBaseData.noteList = this._searchByTitleAndContents(filteredNotebookBaseData.noteList, option.params.query);
         }
@@ -100,13 +108,14 @@ let axiosMock = {
     }
     /* NOTE DETAIL DATA */
     else if(/\/api\/note\/\d+\//.exec(url)) {
-      const id = url.split('/')[3];
-      const emptyObj = { id: id, title: "", date: "2018-01-16", notebookId: 1, notebookTitle: 'TODO', contents: ""}
+      const id = url.split('/')[3], today = moment().format('YYYY-MM-DD');;
+      const emptyObj = { id: id, title: "", date: today, notebookId: 1, notebookTitle: 'TODO', contents: ""}
       return this._promiseMaker(this.noteBaseData.filter(d => d.id === Number(id)).pop() || emptyObj)
     }
   },
 
   post: function(url, option) {
+    /* SAVE NOTE BY ID */
     if(/\/api\/note\/\d\//.exec(url)) {
       let id = url.split('/')[3];
       return this._promiseMaker(`Note no.${id} successfully saved`);
@@ -114,12 +123,14 @@ let axiosMock = {
   },
 
   delete: function(url) {
+    /* DELETE NOTE BY ID */
     let id = url.split('/')[3];
     this.noteBaseData = this.noteBaseData.filter(d => d.id !== Number(id));
     return this._promiseMaker(`Note no.${id} successfully deleted`);
   },
 
   put: function(url) {
+    /* MOVE NOTE BY ID */
     return this._promiseMaker(`Note was successfully moved`);
   }
 }

@@ -8,6 +8,7 @@
     "history": "^4.7.2",
     "less-watch-compiler": "^1.10.2",
     "lodash": "^4.17.4",
+    "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",

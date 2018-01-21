@@ -50,10 +50,12 @@ class NotePage extends Component {
     });
   };
 
+  /* Occurs when textarea changes */
   handleChange = formData => {
     this.autosaveNote(formData);
   };
 
+  /* Delete note by id */
   handleDelete = () => {
     const { history, noteDetail, deleteNote } = this.props;
     deleteNote(this.state.noteId).then(res => {
@@ -62,6 +64,7 @@ class NotePage extends Component {
     });
   };
 
+  /* Move note by id */
   handleMoving = value => {
     this.setState({notebookTitle: value });
     this.props.moveNote(this.state.noteId).then(res => {
@@ -71,6 +74,14 @@ class NotePage extends Component {
 
   render() {
     const { noteDetail } = this.props;
+    const renderSelectNotebook = (
+      <Select
+        value={this.state.notebookTitle}
+        onChange={this.handleMoving} >
+        <Select.Option value="TODO">TODO</Select.Option>
+        <Select.Option value="DONE">DONE</Select.Option>
+      </Select>
+    );
 
     return (
       <div>
@@ -78,36 +89,23 @@ class NotePage extends Component {
           <div>
             <section className="noteTitleSection">
               <h2 className="headTitle">
-                <Input
-                  size="large"
-                  placeholder="Title"
-                  value={this.state.noteTitle}
-                  onChange={e => this.setState({ noteTitle: e.target.value })}
-                />
+                <Input size="large" placeholder="Title" value={this.state.noteTitle}
+                  onChange={e => this.setState({ noteTitle: e.target.value })} />
               </h2>
               <span>{noteDetail.date}</span>
-              <Select
-                value={this.state.notebookTitle}
-                onChange={this.handleMoving}
-              >
-                <Select.Option value="TODO">TODO</Select.Option>
-                <Select.Option value="DONE">DONE</Select.Option>
-              </Select>
+              {renderSelectNotebook}
             </section>
             <section className="contentsSection">
               <SimpleMDE
                 value={this.state.noteValue}
                 onChange={this.handleChange}
-                options={{ spellChecker: false }}
-              />
+                options={{ spellChecker: false }} />
             </section>
             <section className="actionSection">
               <Popconfirm
                 title="Are you sure delete this note?"
                 onConfirm={this.handleDelete}
-                okText="Yes"
-                cancelText="No"
-              >
+                okText="Yes" cancelText="No" >
                 <Button type="danger" shape="circle" icon="delete" />
               </Popconfirm>
             </section>
