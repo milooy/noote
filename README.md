@@ -1,7 +1,7 @@
 # noote
 Simple, lightweight note app with React.
 ![screenshot](screenshot.png)
-It is ZEPL's [challange](https://github.com/ZEPL/front-end-challenge/tree/master/notes-app).
+It is ZEPL's [challenge](https://github.com/ZEPL/front-end-challenge/tree/master/notes-app).
 
 ## How to run
 It also deployed at [Noote with Firebase](https://nootebook-zepl.firebaseapp.com/).
