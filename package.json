@@ -16,7 +16,8 @@
     "react-scripts": "1.1.0",
     "react-simplemde-editor": "^3.6.11",
     "redux": "^3.7.2",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "npm-run-all": "^4.1.2"
   },
   "scripts": {
     "build-css": "less-watch-compiler --run-once src/less src/css",
@@ -27,5 +28,9 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1"
   }
 }
