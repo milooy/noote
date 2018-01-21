@@ -1,5 +1,6 @@
 # noote
-Notepad with react&redux
+![screenshot](screenshot.png)
+Simple, lightweight note app with React
 It is ZEPL's [challange](https://github.com/ZEPL/front-end-challenge/tree/master/notes-app).
 
 ## How to run
@@ -16,12 +17,23 @@ $ npm run test
 ## Issues
 Issues are in the [github issue page](https://github.com/milooy/noote/issues/)
 
+## API Specifications
+| Method | URI                  | Action name         | Response                                                                                              |
+|--------|----------------------|---------------------|-------------------------------------------------------------------------------------------------------|
+| GET    | /api/note/           | fetchNoteList       | [{ id: 1, title: "string", date: "date", notebookId: 1, notebookTitle: "string", contents: "string"}] |
+| GET    | /api/notebook/       | fetchNotebookList   | [{ id: 1, title: "string", desc: "string", noteIdList: [], color: "string" }]                         |
+| GET    | /api/notebook/${id}/ | fetchNotebookDetail | { id: 1, title: "string", desc: "string", noteIdList: [], color: "string" }                           |
+| POST   | /api/note/${id}/     | postNote            | "Note no.${id} successfully saved"                                                                    |
+| DELETE | /api/note/${id}/     | deleteNote          | "Note no.${id} successfully deleted"                                                                  |
+| PUT    | /api/note/${id}/     | moveNote            | "Note was successfully moved"                                                                         |
+
 ## Dependencies
 - UI library: ant design
 - HTTP Client: axios-like custom mocking promise
 - CSS Preprocessor: LESS
 - WYSIWIG Editor: SimpleMDE
 - Hosting: Firebase
+- Testing: jest, enzyme
 - Other react related library: Redux, redux-promise
 
 ---
@@ -53,8 +65,8 @@ Expected User behavior in organizing note will be like this
 - [x] all notes and notebooks should be able to access by url
 - [x] all communication with backend side will be happened via REST api
     - [x] but you don’t need to implement, just make mock
-    - [ ] We will not provide API, you should make your own specification
-- [ ] You need to write test against component
+    - [x] We will not provide API, you should make your own specification
+- [x] You need to write test against component
 
 ## Good to have
 - [ ] Integration test
