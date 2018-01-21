@@ -14,7 +14,7 @@ class Sidebar extends Component {
             key="notebooks"
             title={
               <span>
-                <Icon type="mail" />
+                <Icon type="folder-open" />
                 <span>Notebooks</span>
               </span>
             }

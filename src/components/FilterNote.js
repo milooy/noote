@@ -8,11 +8,11 @@ class FilterNote extends Component {
         <Input.Search
           placeholder="Search"
           onSearch={this.props.onSearch}
-          style={{ width: 200 }}
+          style={{ width: 150 }}
         />
         <Select
           defaultValue="date"
-          style={{ width: 160 }}
+          style={{ width: 130, marginLeft: '0.4rem' }}
           onChange={this.props.onChange}
         >
           <Select.Option value="date">Sort by date</Select.Option>

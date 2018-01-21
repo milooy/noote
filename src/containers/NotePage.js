@@ -76,6 +76,7 @@ export class NotePage extends Component {
     const { noteDetail } = this.props;
     const renderSelectNotebook = (
       <Select
+        className="select-notebook"
         value={this.state.notebookTitle}
         onChange={this.handleMoving} >
         <Select.Option value="TODO">TODO</Select.Option>
@@ -92,8 +93,7 @@ export class NotePage extends Component {
                 <Input size="large" placeholder="Title" value={this.state.noteTitle}
                   onChange={e => this.setState({ noteTitle: e.target.value })} />
               </h2>
-              <span>{noteDetail.date}</span>
-              {renderSelectNotebook}
+              <p className="date">{noteDetail.date}</p>
             </section>
             <section className="contentsSection">
               <SimpleMDE
@@ -108,6 +108,7 @@ export class NotePage extends Component {
                 okText="Yes" cancelText="No" >
                 <Button type="danger" shape="circle" icon="delete" />
               </Popconfirm>
+              {renderSelectNotebook}
             </section>
           </div>
         )}

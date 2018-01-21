@@ -66,7 +66,8 @@ class NotebookPage extends Component {
             <section className="titleSection"
               style={{ background: notebookDetail.color }} >
               <h2 className="headtitle">{notebookDetail.title}</h2>
-              <span>{notebookDetail.desc}</span>
+              <div className="desc">{notebookDetail.desc}</div>
+              <div className="num">{notebookDetail.noteList.length} Notes</div>
             </section>
             <FilterNote onSearch={this.handleSearch} onChange={this.handleSortingChange} />
             <NoteList

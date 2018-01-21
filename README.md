@@ -1,12 +1,16 @@
 # noote
 Notepad with react&redux
-It is ZEPL's [challange](https://github.com/ZEPL/front-end-challenge/tree/master/notes-app). Yeah!
+It is ZEPL's [challange](https://github.com/ZEPL/front-end-challenge/tree/master/notes-app).
 
 ## How to run
-It also deployed at [Noote](https://nootebook-zepl.firebaseapp.com/) with Firebase.
+It also deployed at [Noote with Firebase](https://nootebook-zepl.firebaseapp.com/).
 ```
+# Run local
 $ npm install
 $ npm start
+
+# Test
+$ npm run test
 ```
 
 ## Issues

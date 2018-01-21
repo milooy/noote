@@ -3,8 +3,38 @@
 section.titleSection {
   margin: -64px -2rem 2rem;
   padding: 64px 2rem 2rem;
+  overflow: hidden;
   @media @ms-xs {
     margin: -64px -1rem 1rem;
     padding: 64px 1rem 1rem;
+  }
+  .headtitle {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    margin: 0;
+  }
+  .desc {
+    font-size: 1.1rem;
+    margin-left: 6px;
+    color: white;
+    font-weight: lighter;
+  }
+  .num {
+    text-align: right;
+    font-size: 1.3rem;
+    margin-top: -1.9rem;
+    margin-bottom: -0.7rem;
+    font-weight: lighter;
+    color: #ffffff;
+  }
+}
+
+.filterNoteSection {
+  margin-bottom: 1rem;
+  text-align: right;
+  .ant-select-selection-selected-value {
+    color: @gray_2;
+    font-weight: lighter;
+    font-size: 0.85rem;
   }
 }

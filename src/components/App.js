@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { NavLink, Route, Switch } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, Icon } from "antd";
 import { Sidebar } from ".";
 import { Home, NotebookPage, NotePage } from "../containers";
 import logo from "../logo.svg";
 import "../css/app.css";
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   render() {
@@ -26,6 +26,10 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
               </Switch>
             </Content>
+            <Footer>
+              Noote ©2018 Created by Jay Jin
+              <a href="https://github.com/milooy/noote/"><Icon type="github" /></a>
+            </Footer>
           </Layout>
         </Layout>
       </div>

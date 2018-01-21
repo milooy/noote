@@ -14,7 +14,7 @@ class Home extends Component {
     return (
       <div>
         <h2 className="subtitle">Recent Notes</h2>
-        <NoteList noteList={noteList} noteAction={{deleteNote, moveNote, fetchNoteList}} />
+        <NoteList noteList={noteList.slice(0, 3)} noteAction={{deleteNote, moveNote, fetchNoteList}} />
         <h2 className="subtitle">Notebooks</h2>
         <NotebookList notebookList={notebookList} />
       </div>
