@@ -9,6 +9,8 @@
     "less-watch-compiler": "^1.10.2",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "npm-run-all": "^4.1.2",
+    "rc-drawer-menu": "^0.5.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -16,8 +18,7 @@
     "react-scripts": "1.1.0",
     "react-simplemde-editor": "^3.6.11",
     "redux": "^3.7.2",
-    "redux-promise": "^0.5.3",
-    "npm-run-all": "^4.1.2"
+    "redux-promise": "^0.5.3"
   },
   "scripts": {
     "build-css": "less-watch-compiler --run-once src/less src/css",

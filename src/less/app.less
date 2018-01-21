@@ -18,17 +18,9 @@ a {
   background: @background !important;
   height: 100%;
 }
-.ant-layout-sider {
-  background: white !important;
-  li {
-    height: 100vh;
-    padding-top: 0.4rem;
-  }
-}
-.ant-layout-sider-zero-width-trigger {
+.drawer-button {
   top: 10px !important;
-  z-index: 1;
-  opacity: 0.9;
+  z-index: 1000;
 }
 .ant-layout-header {
   background: transparent !important;
@@ -43,7 +35,10 @@ a {
 }
 .ant-layout-content {
   padding: 0 2rem;
+  margin: 0 auto;
   margin-bottom: 2rem;
+  max-width: 980px;
+  width: 99.9%;
   @media @ms-xs {
     padding: 0 1rem;
   }

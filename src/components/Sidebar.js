@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from 'react-router-dom'
-import { Menu, Icon, Layout } from "antd";
+import { Menu, Icon } from "antd";
+import Drawer from 'rc-drawer-menu';
 
 class Sidebar extends Component {
   render() {
     return (
-      <Layout.Sider breakpoint="sm" collapsedWidth="0">
+      <Drawer width="200px">
         <Menu
           mode="inline"
           defaultOpenKeys={["notebooks"]}
@@ -23,7 +24,7 @@ class Sidebar extends Component {
             <Menu.Item key="2"><NavLink to="/notebook/2/" activeClassName="ant-menu-item-selected">DONE</NavLink></Menu.Item>
           </Menu.SubMenu>
         </Menu>
-      </Layout.Sider>
+      </Drawer>
     );
   }
 }
