@@ -6,16 +6,20 @@ export default class extends Component {
   handleMenuClick = e => {
     const { noteData, noteAction } = this.props;
     const noteId = noteData.id;
+    const MenuKey = {
+      MOVE: "MOVE",
+      DELETE: "DELETE"
+    };
     e.domEvent.stopPropagation();
 
     switch (e.key) {
-      case "0": /* Move note to other notebook */
+      case MenuKey.MOVE: /* Move note to other notebook */
         noteAction.moveNote(noteId).then(res => {
           message.success(res.payload.data);
           noteAction.fetchNoteList(); /* Refresh note list */
         });
         break;
-      case "1": /* Delete note */
+      case MenuKey.DELETE: /* Delete note */
         noteAction.deleteNote(noteId).then(res => {
           message.success(res.payload.data);
           noteAction.fetchNoteList(); /* Refresh note list */
@@ -31,11 +35,11 @@ export default class extends Component {
 
     const menu = (
       <Menu onClick={this.handleMenuClick}>
-        <Menu.Item key="0">
+        <Menu.Item key="MOVE">
           Move to {noteData.notebookId === 1 ? "DONE" : "TODO"}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="1">Delete Note</Menu.Item>
+        <Menu.Item key="DELETE">Delete Note</Menu.Item>
       </Menu>
     );
 
